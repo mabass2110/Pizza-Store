@@ -4,23 +4,19 @@ using ContosoPizza.Models;
 using ContosoPizza.Services;
 using ContosoPizza.Models;
 using ContosoPizza.Services;
-namespace ContosoPizza.Pages
+namespace ContosoPizza.Pages;
+public class PizzaListModel : PageModel
 {
-    public class PizzaListModel : PageModel
+    private readonly PizzaService _service;
+    public IList<Pizza> PizzaList { get;set; } = default!;
+
+    public PizzaListModel(PizzaService service)
     {
-        private readonly PizzaService _service;
+        _service = service;
+    }
 
-
-        public PizzaListModel(PizzaService service){
-
-            _service = service;
-
-        }
-        public IList<Pizza> PizzaList { get;set; } = default!;
-        
-        public void OnGet()
-        {
-            PizzaList = _service.GetPizzas();
-        }
+    public void OnGet()
+    {
+        PizzaList = _service.GetPizzas();
     }
 }
