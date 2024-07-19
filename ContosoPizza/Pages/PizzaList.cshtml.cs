@@ -17,11 +17,13 @@ public class PizzaListModel : PageModel
         _service = service;
     }
 
+//get a pizza
     public void OnGet()
     {
         PizzaList = _service.GetPizzas();
     }
 
+//add a new pizza
     public IActionResult OnPost()
 {
     if (!ModelState.IsValid || NewPizza == null)
@@ -33,5 +35,16 @@ public class PizzaListModel : PageModel
 
     return RedirectToAction("Get");
 }
+
+//delete a pizza using id
+public IActionResult OnPostDelete(int id)
+{
+    _service.DeletePizza(id);
+
+    return RedirectToAction("Get");
+}
+
+
+
 }
 
